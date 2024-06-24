@@ -2,6 +2,96 @@
 // paper beats rock and loses to scissors
 // scissors beats paper and loses to rock 
 
+let playerScore = 0
+let computerScore = 0
+let roundWinner = ''
+
+//Game Logic
+
+function playRound(playerSelection, computerSelection) {
+    if (playerSelection === computerSelection) {
+        roundWinner = 'tie'
+    } else if ((playerselection === 'ROCK' && computerSelection === 'SCISSORS') || (playerSelection === 'PAPER' && computerSelection === 'ROCK') || (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')) {
+        playerScore++
+        roundWinner == 'player'
+    } else {
+        computerScore++
+        roundWinner =='computer'
+    }
+    updateScore(playerScore, computerScore, roundWinner)
+}
+
+function computerChoice() {
+    let randomNumber = Math.floor(Math.random() * 3)
+    switch (randomNumber) {
+        case 0:
+            return 'ROCK'
+        case 1:
+            return 'PAPER'
+        case 2:
+            return 'SCISSORS'
+    }
+}
+
+function isGameOver() {
+    return playerScore === 5 || computerScore === 5
+}
+
+// handle any click on the screen function 
+
+    // check if games over if so open modal and retrun nothing
+
+    // if not get computer selection 
+
+    //if game is over opene endgame modal and set final message
+
+//updating choices function
+
+//updating score function
+
+//updating score message funciton
+
+// open endgame modal
+
+//close endgame modal
+
+//final message function for modal 
+
+//restart game function 
+
+
+
+
+
+
+
+
+
+//UI
+const scoreInfo = document.getElementById("scoreInfo")
+const scoreMsg = document.getElementById("scoreMessage")
+const playerSign = document.getElementById("playersign")
+const playerScoreUI = document.getElementById("playerscore")
+const computerSign = document.getElementById("computersign")
+const computerScoreUI = document.getElementById("computerscore")
+const rockBtn = document.getElementById("rockBtn")
+const paper = document.getElementById("paperBtn")
+const scissors = document.getElementById("scissorsBtn")
+const modal = document.getElementById("endgameModal")
+const modalMsg = document.getElementById("endgameMsg")
+const restartBtn = document.getElementById("restartBtn")
+const overlay = document.getElementById("overlay")
+
+
+
+//event listeners 
+rockBtn.addEventListener('click', () => handleClick('ROCK'))
+paper.addEventListener('click', () => handleClick('PAPER'))
+scissors.addEventListener('click', () => handleClick('SCISSORS'))
+restartBtn.addEventListener('click', restartGame)
+overlay.addEventListener('click', closeEndgameModal)
+
+
 
 
 /* .modal.active {
