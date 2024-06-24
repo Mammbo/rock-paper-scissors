@@ -4,9 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="rock-paper-scissors.js"></script>
-    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>rock-paper-scissors</title>
 </head>
 <body>
-
+    <header class="header">
+        <h1 class="title">ROCK PAPER SCISSORS</h1>
+    </header>
+    <main class="main">
+        <div class="scoredboard">
+            <h2 class="score-info" id="scoreInfo">Choose your Weapon</h2>
+            <h3 class="score-message" id="scoreMessage"> First to score 5 points wins the game </h3>
+            <div class="scores-container">
+                <div class="score-box1">
+                    <div class="sign" id="playersign">❔</div>
+                    <p class="score" id="playerscore">Player: 0</p>
+                </div>
+                <div class="score-box2">
+                    <div class="sign" id="computersign">❔</div>
+                    <p class="score" id="computerscore">Computer: 0</p>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button class="btn btn-square" id="rockBtn">
+                <img class="game-image" src="./images/rock.png">
+            </button>
+            <button class="btn btn-square" id="paperBtn">
+                <img class="game-image"src="./images/paper.png">
+            </button>
+            <button class="btn btn-square" id="scissorsBtn">
+                <img class="game-image" src="./images/scissors.png">
+            </button>
+        </div>
+    </main>
+    <footer>
+        <p>Copyright © 2024 Mammbo</p>
+        <a href="https://github.com/Mammbo/rock-paper-scissors" target="_blank">
+            <i class="fab fa-github" aria-hidden="true"></i>
+        </a>
+    </footer>
+    <div class="modal" id="endgameModal">
+        <p class="modalTitle" id="endgameMsg">You won!</p>
+        <button class="btn btn-restart" id="restartBtn">Play Again</button>
+    </div>
+    <div class="overlay"></div>
 </body>
 </html>
