@@ -51,7 +51,8 @@ const modal = document.getElementById("endgameModal")
 const modalMsg = document.getElementById("endgameMsg")
 const restartBtn = document.getElementById("restartBtn")
 const overlay = document.getElementById("overlay")
-
+const playerSign = document.getElementById("playersign")
+const computerSign = document.getElementById("computersign")
 
 
 //event listeners 
@@ -185,6 +186,17 @@ function setFinalMessage() {
 
 function restartGame() {
     //basically set everything back to how it was 
+
+    modal.classList.remove("active")
+    overlay.classList.remove("active")
+    scoreInfo.textContent = "Choose your Weapon"
+    scoreMsg.textContent = "First to score 5 Points wins the game"
+    playerScoreUI.textContent = "Player: 0"
+    computerScoreUI.textContent = "Computer: 0"
+    playerSign.removeChild(playerSign.querySelector('img'));
+    computerSign.removeChild(computerSign.querySelector('img'));
+    playerSign.textContent = "❔"
+    computerSign.textContent = "❔"
     
 }
  
