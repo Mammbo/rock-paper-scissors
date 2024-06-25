@@ -197,6 +197,8 @@ function restartGame() {
     computerSign.removeChild(computerSign.querySelector('img'));
     playerSign.textContent = "❔"
     computerSign.textContent = "❔"
-    
+    playerScore = 0
+    computerScore = 0 
+    roundWinner = ''
 }
  
