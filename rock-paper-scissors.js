@@ -6,19 +6,20 @@ let playerScore = 0
 let computerScore = 0
 let roundWinner = ''
 
+
 //Game Logic
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection === computerSelection) {
         roundWinner = 'tie'
-    } else if ((playerselection === 'ROCK' && computerSelection === 'SCISSORS') || (playerSelection === 'PAPER' && computerSelection === 'ROCK') || (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')) {
+    } else if ((playerSelection === 'ROCK' && computerSelection === 'SCISSORS') || (playerSelection === 'PAPER' && computerSelection === 'ROCK') || (playerSelection === 'SCISSORS' && computerSelection === 'PAPER')) {
         playerScore++
-        roundWinner == 'player'
+        roundWinner = 'player'
     } else {
         computerScore++
-        roundWinner =='computer'
+        roundWinner = 'computer'
     }
-    updateScore(playerScore, computerScore, roundWinner)
+    updateScoreMessage(playerSelection, computerSelection, roundWinner)
 }
 
 function computerChoice() {
@@ -37,44 +38,13 @@ function isGameOver() {
     return playerScore === 5 || computerScore === 5
 }
 
-// handle any click on the screen function 
-
-    // check if games over if so open modal and retrun nothing
-
-    // if not get computer selection 
-
-    //if game is over opene endgame modal and set final message
-
-//updating choices function
-
-//updating score function
-
-//updating score message funciton
-
-// open endgame modal
-
-//close endgame modal
-
-//final message function for modal 
-
-//restart game function 
-
-
-
-
-
-
-
-
 
 //UI
 const scoreInfo = document.getElementById("scoreInfo")
 const scoreMsg = document.getElementById("scoreMessage")
-const playerSign = document.getElementById("playersign")
 const playerScoreUI = document.getElementById("playerscore")
-const computerSign = document.getElementById("computersign")
 const computerScoreUI = document.getElementById("computerscore")
-const rockBtn = document.getElementById("rockBtn")
+const rock = document.getElementById("rockBtn")
 const paper = document.getElementById("paperBtn")
 const scissors = document.getElementById("scissorsBtn")
 const modal = document.getElementById("endgameModal")
@@ -85,30 +55,136 @@ const overlay = document.getElementById("overlay")
 
 
 //event listeners 
-rockBtn.addEventListener('click', () => handleClick('ROCK'))
+rock.addEventListener('click', () => handleClick('ROCK'))
 paper.addEventListener('click', () => handleClick('PAPER'))
 scissors.addEventListener('click', () => handleClick('SCISSORS'))
 restartBtn.addEventListener('click', restartGame)
-overlay.addEventListener('click', closeEndgameModal)
+overlay.addEventListener('click', closeModal)
 
 
+// handle any click on the screen function 
+
+function handleClick(playerSelection) {
+    if (isGameOver()) {
+        openModal()
+        return 
+    }
+
+    const computerSelection = computerChoice()
+    playRound(playerSelection, computerSelection)
+    updateChoice(playerSelection, computerSelection)
+    updateScore()
 
 
-/* .modal.active {
-  transform: translate(-50%, -50%) scale(1);
+    if (isGameOver()) {
+        openModal()
+        setFinalMessage()
+    }
 }
 
-.overlay.active {
-  display: block;
+//updating choices function
+
+function updateChoice(playerSelection, computerSelection) {
+
+    const playerSign = document.getElementById("playersign")
+    const computerSign = document.getElementById("computersign")
+
+    if (playerSelection === 'ROCK') {
+        playerSign.textContent = "";
+        let img = document.createElement('img');
+        img.src = "./images/rock.png"
+        img.style.maxWidth = '200px';
+        img.style.maxHeight = '200px';
+        playerSign.appendChild(img)
+    } else if (playerSelection === 'PAPER') {
+        playerSign.textContent = "";
+        let img = document.createElement('img');
+        img.src = "./images/paper.png"
+        img.style.maxWidth = '200px';
+        img.style.maxHeight = '200px';
+        playerSign.appendChild(img)
+    } else if (playerSelection === 'SCISSORS') {
+        playerSign.textContent = "";
+        let img = document.createElement('img');
+        img.src = "./images/scissors.png"
+        img.style.maxWidth = '200px';
+        img.style.maxHeight = '200px';
+        playerSign.appendChild(img)
+    } 
+
+    if (computerSelection === 'ROCK') {
+        computerSign.textContent = "";
+        let img = document.createElement('img');
+        img.src = "./images/rock.png"
+        img.style.maxWidth = '200px';
+        img.style.maxHeight = '200px';
+        computerSign.appendChild(img)
+    } else if (computerSelection === 'PAPER') {
+        computerSign.textContent = "";
+        let img = document.createElement('img');
+        img.src = "./images/paper.png"
+        img.style.maxWidth = '200px';
+        img.style.maxHeight = '200px';
+        computerSign.appendChild(img)
+    } else if (computerSelection === 'SCISSORS') {
+        computerSign.textContent = "";
+        let img = document.createElement('img');
+        img.src = "./images/scissors.png"
+        img.style.maxWidth = '200px';
+        img.style.maxHeight = '200px';
+        computerSign.appendChild(img)
+    }
 }
 
-display both those values at the end in css and add active to both classes and disable display in overlay and transform in modal. */
 
+//updating score function
+function updateScore() {
+    playerScoreUI.textContent = `Player: ${playerScore}`
+    computerScoreUI.textContent = `Computer: ${computerScore}`
 
-// okay so the logic goes as follow 
-// 1. blank screeen telling the user to pick a weapon 
+    if (roundWinner === 'tie') {
+        scoreInfo.textContent = "It's a Tie !"
+    } else if (roundWinner === 'player') {
+        scoreInfo.textContent = "You Win !"
+    } else if (roundWinner === 'computer') {
+        scoreInfo.textContent = "You Lose :,<"
+    }
+}
 
-// once their choice is clicked which needs to be listend to by a click enviornment lister, the computer program will run and give the random choice.
-// the choose weapon next needs to be changed via js based off of the result of the match (tie win loss) and the text below that needs to display the choices ex: paper(human) beats rock(computer)!
-//2. while that happens a point needs to be added to the player score. 
-//3. once either player or computer reaches 5 the game is over and a pop up will appear asking to play again at that point new css elements will need to be added and changed along with the html file so the modal can popup. once clicked the dom will be reset restarting the program. 
+//updating score message funciton
+function updateScoreMessage(playerSelection, computerSelection, winner) {
+    if (winner === 'tie') {
+        scoreMsg.textContent = `${playerSelection} and ${computerSelection} are the same !`
+    } else if (winner === 'player'){
+        scoreMsg.textContent = `${playerSelection} beats ${computerSelection}!`
+    } else if (winner === 'computer') {
+        scoreMsg.textContent = `${computerSelection} beats ${playerSelection}!`
+    }
+}
+
+// open endgame modal
+function openModal() {
+    modal.classList.add("active")
+    overlay.classList.add("active")
+}
+
+//close endgame modal
+function closeModal() {
+    modal.classList.remove("active")
+    overlay.classList.remove("active")
+}
+
+//final message function for modal
+function setFinalMessage() {
+    if (playerScore > computerScore) {
+        modalMsg.textContent = "You Won!"
+    } else {
+        modalMsg.textContent = "You lost."
+    }
+} 
+
+function restartGame() {
+    //basically set everything back to how it was 
+    
+}
+ 
